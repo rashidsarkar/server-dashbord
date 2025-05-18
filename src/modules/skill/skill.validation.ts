@@ -1,18 +1,19 @@
 import { z } from "zod";
 
 const createSkillSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  categoryId: z.string().uuid("Invalid category ID"),
-}).strict();
-
+  body: z.object({
+    name: z.string().min(1, "Name is required"),
+    category: z.enum(["FRONTEND", "BACKEND", "DATABASE", "TOOLS"]),
+  }),
+});
 const updateSkillSchema = z.object({
   name: z.string().min(1, "Name is required").optional(),
-  categoryId: z.string().uuid("Invalid category ID").optional(),
-}).strict();
+  category: z.enum(["FRONTEND", "BACKEND", "DATABASE", "TOOLS"]).optional(),
+});
 
 const skillValidation = {
   createSkillSchema,
   updateSkillSchema,
 };
 
-export default skillValidation; 
+export default skillValidation;

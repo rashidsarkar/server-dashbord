@@ -1,23 +1,16 @@
+import { Project } from "@prisma/client";
 import prisma from "../../shared/prisma";
 
 const getAllProjects = async () => {
-  const result = await prisma.project.findMany({
-    include: {
-      features: true,
-      projectCredential: true,
-    },
-  });
+  const result = await prisma.project.findMany({});
   return result;
 };
 
-const createProject = async (data: any) => {
+const createProject = async (payload: Project) => {
   const result = await prisma.project.create({
-    data,
-    include: {
-      features: true,
-      projectCredential: true,
-    },
+    data: { ...payload },
   });
+
   return result;
 };
 
@@ -25,10 +18,6 @@ const getProjectById = async (id: string) => {
   const result = await prisma.project.findUnique({
     where: {
       id,
-    },
-    include: {
-      features: true,
-      projectCredential: true,
     },
   });
   return result;
@@ -40,10 +29,6 @@ const updateProject = async (id: string, data: any) => {
       id,
     },
     data,
-    include: {
-      features: true,
-      projectCredential: true,
-    },
   });
   return result;
 };
@@ -52,10 +37,6 @@ const deleteProject = async (id: string) => {
   const result = await prisma.project.delete({
     where: {
       id,
-    },
-    include: {
-      features: true,
-      projectCredential: true,
     },
   });
   return result;
@@ -67,4 +48,4 @@ export const projectService = {
   getProjectById,
   updateProject,
   deleteProject,
-}; 
+};
