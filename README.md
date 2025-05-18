@@ -1,8 +1,8 @@
-# Bike Servicing Management System
+ 
 
-A complete backend solution for managing bike servicing records, customers, and service statuses. This system helps you maintain a seamless workflow for registering bikes, tracking service records, updating statuses, and managing customer information.
+A complete backend solution for managing a personal portfolio website. This system helps you manage projects, skills, education, blog posts, and user information.
 
-🔗 **Live Backend**: [https://bike-servicing-management-a8-fwq1.vercel.app/](https://bike-servicing-management-a8-fwq1.vercel.app/)
+🔗 **Live Backend**: [Your deployed backend URL]
 
 ---
 
@@ -12,10 +12,8 @@ A complete backend solution for managing bike servicing records, customers, and 
 - **Express.js** – Web framework
 - **TypeScript** – Typed superset of JavaScript
 - **Prisma ORM** – Type-safe database interaction
-- **PostgreSQL** – Database (can be replaced with other relational DBs)
-- **Zod** – Request validation
-- **HTTP-Status** – Status code management
-- **JWT** – For future authentication
+- **PostgreSQL** – Database
+- **JWT** – Authentication
 - **Cookie-Parser, CORS** – Middleware
 
 ---
@@ -25,8 +23,8 @@ A complete backend solution for managing bike servicing records, customers, and 
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/bike-servicing-management-a8.git
-   cd bike-servicing-management-a8
+   git clone [your-repository-url]
+   cd [repository-name]
    ```
 
 2. **Install dependencies**
@@ -36,10 +34,11 @@ A complete backend solution for managing bike servicing records, customers, and 
    ```
 
 3. **Setup environment variables**
-   Create a `.env` file with your database URL:
+   Create a `.env` file with the following variables:
 
    ```env
    DATABASE_URL=your_postgresql_connection_string
+   JWT_SECRET=your_jwt_secret
    ```
 
 4. **Run Prisma migrations**
@@ -55,45 +54,183 @@ A complete backend solution for managing bike servicing records, customers, and 
 
 ---
 
-## ✨ Key Features
+## 📚 API Endpoints
 
-- **Customer Management**
+### Authentication
 
-  - Create, update, delete, and fetch customer info
+#### Register User
 
-- **Bike Management**
+```http
+POST /api/auth/register
+Content-Type: application/json
 
-  - Register bikes, view all bikes, or get specific bike info
+{
+  "email": "user@example.com",
+  "password": "password123",
+  "name": "John Doe"
+}
+```
 
-- **Service Record Handling**
+#### Login
 
-  - Add service records, fetch all or specific records
-  - Update service status (e.g., mark as complete)
+```http
+POST /api/auth/login
+Content-Type: application/json
 
-- **Overdue Services Checker**
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
 
-  - Get services with pending or in-progress status beyond 7 days
+### User Profile
 
-- **Validation**
+#### Get User Profile
 
-  - Uses Zod for input validation
+```http
+GET /api/user/profile
+Authorization: Bearer <token>
+```
 
-- **Structured Response**
-  - All API responses follow a standard structure
+#### Update User Profile
+
+```http
+PUT /api/user/profile
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "name": "Updated Name",
+  "bio": "Updated bio",
+  "avatar": "avatar-url"
+}
+```
+
+### Projects
+
+#### Create Project
+
+```http
+POST /api/projects
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "title": "Project Title",
+  "description": "Project Description",
+  "imageUrl": "image-url",
+  "liveUrl": "live-url",
+  "githubUrl": "github-url",
+  "technologies": ["React", "Node.js"]
+}
+```
+
+#### Get All Projects
+
+```http
+GET /api/projects
+```
+
+#### Get Project by ID
+
+```http
+GET /api/projects/:id
+```
+
+### Skills
+
+#### Create Skill Category
+
+```http
+POST /api/skill-categories
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "name": "Frontend",
+  "description": "Frontend Development Skills"
+}
+```
+
+#### Add Skill
+
+```http
+POST /api/skills
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "name": "React",
+  "categoryId": "category-id",
+  "proficiency": 90
+}
+```
+
+### Education
+
+#### Add Education
+
+```http
+POST /api/education
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "institution": "University Name",
+  "degree": "Bachelor's Degree",
+  "field": "Computer Science",
+  "startDate": "2018-09",
+  "endDate": "2022-06",
+  "description": "Education description"
+}
+```
+
+### Blog Posts
+
+#### Create Blog Post
+
+```http
+POST /api/blog
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "title": "Blog Title",
+  "content": "Blog content",
+  "imageUrl": "image-url",
+  "tags": ["web", "development"]
+}
+```
+
+#### Get All Blog Posts
+
+```http
+GET /api/blog
+```
 
 ---
 
-## 📁 Folder Structure
+## 📁 Project Structure
 
 ```bash
 src
 ├── modules
-│   ├── bike
-│   ├── customer
-│   └── service
-├── middleware
+│   ├── about
+│   ├── auth
+│   ├── blog
+│   ├── education
+│   ├── project
+│   ├── project-credential
+│   ├── project-feature
+│   ├── skill
+│   ├── skill-category
+│   └── user
+├── middlewares
+├── routers
 ├── shared
+├── types
 ├── utils
+├── app.ts
 └── server.ts
 ```
 
@@ -101,11 +238,13 @@ src
 
 ## 🔮 Future Improvements
 
-- Add user authentication with roles (admin/user)
-- Paginate and search endpoints
-- Unit and integration testing
+- Add image upload functionality
+- Implement pagination for blog posts and projects
+- Add search functionality
+- Add unit and integration testing
 - Add Swagger/OpenAPI documentation
-- Frontend integration (optional React app)
+- Implement rate limiting
+- Add caching layer
 
 ---
 
@@ -115,4 +254,4 @@ This project is open-source and available under the [MIT License](LICENSE).
 
 ---
 
-Crafted with ❤️ by [MD Rashid Sarkar](https://github.com/rashidsarkar)
+Crafted with ❤️ by [Your Name]
