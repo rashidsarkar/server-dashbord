@@ -15,12 +15,12 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  name      String
-  password  String
-  role      Role     @default(USER)
-  blogs     Blog[]
+  id       String @id @default(uuid())
+  email    String @unique
+  name     String
+  password String
+  role     Role   @default(USER)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -40,8 +40,6 @@ model Blog {
   content   String   @db.Text
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  String
 }
 
 model SkillCategory {
