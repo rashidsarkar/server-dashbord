@@ -1,5 +1,3 @@
- 
-
 A complete backend solution for managing a personal portfolio website. This system helps you manage projects, skills, education, blog posts, and user information.
 
 🔗 **Live Backend**: [Your deployed backend URL]
@@ -255,3 +253,4 @@ This project is open-source and available under the [MIT License](LICENSE).
 ---
 
 Crafted with ❤️ by [Your Name]
+r

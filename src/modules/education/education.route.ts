@@ -19,4 +19,6 @@ router.patch(
 );
 router.delete("/:id", educationController.deleteEducation);
 
+export const educationRouter = router;
+
  
