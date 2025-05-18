@@ -1,7 +1,7 @@
 import express from "express";
 import { projectCredentialController } from "./project-credential.controller";
-import { projectCredentialValidation } from "./project-credential.validation";
-import validateRequest from "../../middlewares/validateRequest";
+import projectCredentialValidation from "./project-credential.validation";
+import validateRequest from "../../middlewares/validatedRequest";
 
 const router = express.Router();
 

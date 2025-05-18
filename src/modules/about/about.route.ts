@@ -1,6 +1,6 @@
 import express from "express";
 import { aboutController } from "./about.controller";
-import validateRequest from "../../middleware/validatedRequest";
+import validateRequest from "../../middlewares/validatedRequest";
 import aboutValidation from "./about.validation";
 
 const router = express.Router();
@@ -19,4 +19,4 @@ router.patch(
 );
 router.delete("/:id", aboutController.deleteAbout);
 
-export const aboutRouter = router; 
+export const aboutRouter = router;

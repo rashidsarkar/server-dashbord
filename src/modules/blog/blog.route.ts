@@ -1,6 +1,6 @@
 import express from "express";
 import { blogController } from "./blog.controller";
-import validateRequest from "../../middleware/validatedRequest";
+import validateRequest from "../../middlewares/validatedRequest";
 import blogValidation from "./blog.validation";
 
 const router = express.Router();

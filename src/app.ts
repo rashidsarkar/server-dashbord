@@ -3,7 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import status from "http-status";
 import router from "./routers";
-import globalErrorHandler from "./middleware/globalErrorHandler";
+import globalErrorHandler from "./middlewares/globalErrorHandler";
 
 const app: Application = express();
 app.use(cors());

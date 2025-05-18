@@ -1,6 +1,6 @@
 import express from "express";
 import { userController } from "./user.controller";
-import validateRequest from "../../middleware/validatedRequest";
+import validateRequest from "../../middlewares/validatedRequest";
 import userValidation from "./user.validation";
 
 const router = express.Router();
@@ -19,4 +19,4 @@ router.patch(
 );
 router.delete("/:id", userController.deleteUser);
 
-export const userRouter = router; 
+export const userRouter = router;

@@ -1,6 +1,6 @@
 import express from "express";
 import { educationController } from "./education.controller";
-import validateRequest from "../../middleware/validatedRequest";
+import validateRequest from "../../middlewares/validatedRequest";
 import educationValidation from "./education.validation";
 
 const router = express.Router();
@@ -20,5 +20,3 @@ router.patch(
 router.delete("/:id", educationController.deleteEducation);
 
 export const educationRouter = router;
-
- 

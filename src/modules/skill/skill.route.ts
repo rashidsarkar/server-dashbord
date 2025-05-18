@@ -1,6 +1,6 @@
 import express from "express";
 import { skillController } from "./skill.controller";
-import validateRequest from "../../middleware/validatedRequest";
+import validateRequest from "../../middlewares/validatedRequest";
 import skillValidation from "./skill.validation";
 
 const router = express.Router();
@@ -19,4 +19,4 @@ router.patch(
 );
 router.delete("/:id", skillController.deleteSkill);
 
-export const skillRouter = router; 
+export const skillRouter = router;

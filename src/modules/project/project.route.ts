@@ -1,6 +1,6 @@
 import express from "express";
 import { projectController } from "./project.controller";
-import validateRequest from "../../middleware/validatedRequest";
+import validateRequest from "../../middlewares/validatedRequest";
 import projectValidation from "./project.validation";
 
 const router = express.Router();
@@ -19,4 +19,4 @@ router.patch(
 );
 router.delete("/:id", projectController.deleteProject);
 
-export const projectRouter = router; 
+export const projectRouter = router;

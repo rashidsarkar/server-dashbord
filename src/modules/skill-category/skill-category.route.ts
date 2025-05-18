@@ -1,6 +1,6 @@
 import express from "express";
 import { skillCategoryController } from "./skill-category.controller";
-import validateRequest from "../../middleware/validatedRequest";
+import validateRequest from "../../middlewares/validatedRequest";
 import skillCategoryValidation from "./skill-category.validation";
 
 const router = express.Router();
@@ -19,4 +19,4 @@ router.patch(
 );
 router.delete("/:id", skillCategoryController.deleteSkillCategory);
 
-export const skillCategoryRouter = router; 
+export const skillCategoryRouter = router;
