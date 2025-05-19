@@ -20,7 +20,7 @@ const updateAboutSchema = z.object({
   location: z.string().min(1, "Location is required").optional(),
   email: z.string().email("Invalid email address").optional(),
   interests: z.array(z.string()).min(1, "At least one interest is required").optional(),
-}).strict();
+});
 
 const aboutValidation = {
   createAboutSchema,
