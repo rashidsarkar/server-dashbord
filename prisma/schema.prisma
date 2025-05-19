@@ -64,9 +64,9 @@ model About {
   bio        String
   experience String
   location   String
-  email      String      @unique
-  education  Education[]
-  interests  String[]
+  email      String      
+  education  String
+
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
 }
@@ -76,8 +76,7 @@ model Education {
   degree      String
   institution String
   year        String
-  about       About    @relation(fields: [aboutId], references: [id])
-  aboutId     String
+
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

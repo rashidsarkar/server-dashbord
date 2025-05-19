@@ -1,14 +1,16 @@
 import { z } from "zod";
 
 const createAboutSchema = z.object({
+  body: z.object({
   name: z.string().min(1, "Name is required"),
   role: z.string().min(1, "Role is required"),
   bio: z.string().min(1, "Bio is required"),
   experience: z.string().min(1, "Experience is required"),
   location: z.string().min(1, "Location is required"),
   email: z.string().email("Invalid email address"),
-  interests: z.array(z.string()).min(1, "At least one interest is required"),
-}).strict();
+  education: z.string().min(1, "Education is required"),
+})
+});
 
 const updateAboutSchema = z.object({
   name: z.string().min(1, "Name is required").optional(),
