@@ -11,7 +11,7 @@ app.use(
     origin: [
       "http://localhost:3000",
       "http://localhost:3001",
-      "https://porotfolio-dashbord.vercel.app",
+      "https://server-dashbord.vercel.app",
     ],
     credentials: true,
   })
