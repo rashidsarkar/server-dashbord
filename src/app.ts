@@ -10,7 +10,8 @@ const app: Application = express();
 const allowedOrigins = [
   "http://localhost:3001",
   "https://porotfolio-dashbord.vercel.app",
-  "https://server-dashbord.vercel.app"
+  "https://server-dashbord.vercel.app",
+  "http://localhost:3000"
 ];
 
 app.use(
