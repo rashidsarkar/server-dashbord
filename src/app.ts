@@ -7,28 +7,14 @@ import globalErrorHandler from "./middlewares/globalErrorHandler";
 
 const app: Application = express();
 // CORS configuration
-const allowedOrigins = [
-  "http://localhost:3001",
-  "https://porotfolio-dashbord.vercel.app",
-  "https://server-dashbord.vercel.app",
-  "http://localhost:3000"
-];
-
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-      
-      if (allowedOrigins.indexOf(origin) === -1) {
-        const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    },
+    origin: [
+      "https://server-client-l2-jp-as1.vercel.app",
+      "http://localhost:3000",
+      "https://porotfolio-dashbord.vercel.app",
+    ],
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
   })
 );
 app.use(express.json());
@@ -36,7 +22,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.get("/", (req: Request, res: Response) => {
   res.send({
-    Message: "Portfolio  Server Start 2",
+    Message: "Portfolio  Server Start 2 with cors 2",
   });
 });
 
