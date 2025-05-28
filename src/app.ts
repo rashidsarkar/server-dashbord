@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.get("/", (req: Request, res: Response) => {
   res.send({
-    Message: "Portfolio  Server Start 2 with cors 2 client netly",
+    Message: "Net Server Start 2 with cors 2 client netly",
   });
 });
 

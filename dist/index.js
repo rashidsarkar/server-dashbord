@@ -11,21 +11,40 @@ const routers_1 = __importDefault(require("./routers"));
 const globalErrorHandler_1 = __importDefault(require("./middlewares/globalErrorHandler"));
 const app = (0, express_1.default)();
 // CORS configuration
+const allowedOrigins = [
+    "http://localhost:3001",
+    "https://porotfolio-dashbord.vercel.app",
+    "https://server-dashbord.vercel.app",
+    "http://localhost:3000",
+    "https://portofilo-req-as1-l2.netlify.app",
+];
 app.use((0, cors_1.default)({
-    origin: [
-        "https://server-client-l2-jp-as1.vercel.app",
-        "http://localhost:3000",
-        "https://porotfolio-dashbord.vercel.app",
-        "https://portofilo-req-as1-l2.netlify.app",
-    ],
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin)
+            return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = "The CORS policy for this site does not allow access from the specified Origin.";
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: [
+        "Content-Type",
+        "Authorization",
+        "X-Requested-With",
+        "Accept",
+        "Origin",
+    ],
 }));
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
     res.send({
-        Message: "Net Server Start 2 with cors 2 client netly",
+        Message: "Portfolio  Server Start 2",
     });
 });
 app.use("/api/", routers_1.default);
