@@ -1,5 +1,9 @@
 import prisma from "../../shared/prisma";
 import bcrypt from "bcrypt";
+import { jwtHelpers } from "../../shared/jwtHelpers";
+import config from "../../config";
+import AppError from "../../shared/AppError";
+import status from "http-status";
 
 const getAllUsers = async () => {
   const result = await prisma.user.findMany({
@@ -32,6 +36,41 @@ const createUser = async (data: any) => {
     },
   });
   return result;
+};
+
+const loginUser = async (payload: { email: string; password: string }) => {
+  const isUserExists = await prisma.user.findUnique({
+    where: { email: payload.email },
+  });
+
+  if (!isUserExists) {
+    throw new AppError(status.NOT_FOUND, "User not found");
+  }
+
+  const isPasswordMatch = await bcrypt.compare(
+    payload.password,
+    isUserExists.password
+  );
+
+  if (!isPasswordMatch) {
+    throw new AppError(status.UNAUTHORIZED, "Invalid password");
+  }
+
+  const { password, ...userData } = isUserExists;
+
+  const accessToken = jwtHelpers.generateToken(
+    {
+      email: userData.email,
+      role: userData.role,
+    },
+    config.jwt.access_secret,
+    config.jwt.access_expires
+  );
+
+  return {
+    accessToken,
+    user: userData,
+  };
 };
 
 const getUserById = async (id: string) => {
@@ -92,7 +131,8 @@ const deleteUser = async (id: string) => {
 export const userService = {
   getAllUsers,
   createUser,
+  loginUser,
   getUserById,
   updateUser,
   deleteUser,
-}; 
+};

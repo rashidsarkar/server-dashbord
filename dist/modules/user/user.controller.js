@@ -35,6 +35,25 @@ const createUser = (0, catchasync_1.default)((req, res) => __awaiter(void 0, voi
         data: result,
     });
 }));
+const loginUser = (0, catchasync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_service_1.userService.loginUser(req.body);
+    // Set refresh token in cookie
+    res.cookie("refreshToken", result.accessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+    });
+    (0, sendResponse_1.sendResponse)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: "User logged in successfully!",
+        data: {
+            accessToken: result.accessToken,
+            user: result.user,
+        },
+    });
+}));
 const getUserById = (0, catchasync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const result = yield user_service_1.userService.getUserById(id);
@@ -68,6 +87,7 @@ const deleteUser = (0, catchasync_1.default)((req, res) => __awaiter(void 0, voi
 exports.userController = {
     getAllUsers,
     createUser,
+    loginUser,
     getUserById,
     updateUser,
     deleteUser,

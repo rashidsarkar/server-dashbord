@@ -2,6 +2,7 @@ import status from "http-status";
 import catchAsync from "../../shared/catchasync";
 import { sendResponse } from "../../utils/sendResponse";
 import { userService } from "./user.service";
+import config from "../../config";
 
 const getAllUsers = catchAsync(async (req, res) => {
   const result = await userService.getAllUsers();
@@ -22,6 +23,28 @@ const createUser = catchAsync(async (req, res) => {
     success: true,
     message: "User created successfully",
     data: result,
+  });
+});
+
+const loginUser = catchAsync(async (req, res) => {
+  const result = await userService.loginUser(req.body);
+
+  // Set refresh token in cookie
+  res.cookie("refreshToken", result.accessToken, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+  });
+
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: "User logged in successfully!",
+    data: {
+      accessToken: result.accessToken,
+      user: result.user,
+    },
   });
 });
 
@@ -64,7 +87,8 @@ const deleteUser = catchAsync(async (req, res) => {
 export const userController = {
   getAllUsers,
   createUser,
+  loginUser,
   getUserById,
   updateUser,
   deleteUser,
-}; 
+};

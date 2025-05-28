@@ -25,7 +25,7 @@ const moduleRoutes = [
     },
     {
         path: "/user",
-        route: user_route_1.userRouter,
+        route: user_route_1.userRoutes,
     },
     {
         path: "/skill",

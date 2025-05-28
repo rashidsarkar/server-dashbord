@@ -19,13 +19,21 @@ app.use((0, cors_1.default)({
         "https://portofilo-req-as1-l2.netlify.app",
     ],
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: [
+        "Content-Type",
+        "Authorization",
+        "X-Requested-With",
+        "Accept",
+        "Origin",
+    ],
 }));
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
     res.send({
-        Message: "Net Server Start 2 with cors 2 client netly",
+        Message: "toke Server Start 2 with cors 2 client netly",
     });
 });
 app.use("/api/", routers_1.default);

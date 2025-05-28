@@ -2,21 +2,35 @@ import express from "express";
 import { userController } from "./user.controller";
 import validateRequest from "../../middlewares/validatedRequest";
 import userValidation from "./user.validation";
+import auth from "../../middlewares/auth";
 
 const router = express.Router();
 
-router.get("/", userController.getAllUsers);
-router.get("/:id", userController.getUserById);
+// Public routes
 router.post(
   "/create-user",
   validateRequest(userValidation.createUserSchema),
   userController.createUser
 );
+
+router.post(
+  "/login",
+  validateRequest(userValidation.loginUserSchema),
+  userController.loginUser
+);
+
+// Protected routes
+router.get("/", auth(), userController.getAllUsers);
+
+router.get("/:id", auth(), userController.getUserById);
+
 router.patch(
   "/:id",
+  auth(),
   validateRequest(userValidation.updateUserSchema),
   userController.updateUser
 );
-router.delete("/:id", userController.deleteUser);
 
-export const userRouter = router;
+router.delete("/:id", auth(), userController.deleteUser);
+
+export const userRoutes = router;

@@ -3,8 +3,7 @@ import express from "express";
 import { blogRouter } from "../modules/blog/blog.route";
 import { aboutRouter } from "../modules/about/about.route";
 import { projectRouter } from "../modules/project/project.route";
-import { userRouter } from "../modules/user/user.route";
-
+import { userRoutes } from "../modules/user/user.route";
 import { skillRouter } from "../modules/skill/skill.route";
 
 const router = express.Router();
@@ -24,9 +23,8 @@ const moduleRoutes = [
   },
   {
     path: "/user",
-    route: userRouter,
+    route: userRoutes,
   },
-
   {
     path: "/skill",
     route: skillRouter,
