@@ -16,6 +16,7 @@ app.use((0, cors_1.default)({
         "https://server-client-l2-jp-as1.vercel.app",
         "http://localhost:3000",
         "https://porotfolio-dashbord.vercel.app",
+        "https://portofilo-req-as1-l2.netlify.app",
     ],
     credentials: true,
 }));
