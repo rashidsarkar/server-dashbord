@@ -11,7 +11,8 @@ const allowedOrigins = [
   "http://localhost:3001",
   "https://porotfolio-dashbord.vercel.app",
   "https://server-dashbord.vercel.app",
-  "http://localhost:3000"
+  "http://localhost:3000",
+   "https://portofilo-req-as1-l2.netlify.app"
 ];
 
 app.use(
